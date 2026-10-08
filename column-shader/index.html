@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Column Shader</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="panel" id="panel">
+      <header class="panel-head">
+        <h1>Column Shader</h1>
+        <div class="head-actions">
+          <button type="button" id="btn-save" title="Save settings as JSON">Save</button>
+          <button type="button" id="btn-load" title="Load settings from JSON">Load</button>
+          <button type="button" id="btn-reset" title="Reset all settings">Reset</button>
+          <input type="file" id="file-load" accept="application/json,.json" hidden />
+        </div>
+      </header>
+
+      <section class="seed-row">
+        <label for="seed">Seed</label>
+        <button type="button" id="seed-prev" title="Previous seed (←)">‹</button>
+        <input type="number" id="seed" step="1" />
+        <button type="button" id="seed-next" title="Next seed (→)">›</button>
+        <button type="button" id="seed-random" class="accent" title="Random seed (R)">Shuffle</button>
+      </section>
+
+      <div id="controls"></div>
+
+      <details open class="group" id="export-group">
+        <summary>Export</summary>
+        <div class="row">
+          <label for="ex-preset">Size</label>
+          <select id="ex-preset"></select>
+        </div>
+        <div class="row">
+          <label for="ex-orient">Orientation</label>
+          <select id="ex-orient">
+            <option value="landscape">Landscape</option>
+            <option value="portrait">Portrait</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="ex-dpi">DPI</label>
+          <input type="number" id="ex-dpi" min="72" max="1200" step="1" />
+        </div>
+        <div class="row two">
+          <label>Pixels</label>
+          <input type="number" id="ex-w" min="16" step="1" aria-label="Width in pixels" />
+          <span class="times">×</span>
+          <input type="number" id="ex-h" min="16" step="1" aria-label="Height in pixels" />
+        </div>
+        <div class="row">
+          <label for="ex-depth">Bit depth</label>
+          <select id="ex-depth">
+            <option value="16">16-bit (smoothest gradients)</option>
+            <option value="8">8-bit (dithered)</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="ex-space">Colour space</label>
+          <select id="ex-space">
+            <option value="p3">Display P3</option>
+            <option value="srgb">sRGB</option>
+          </select>
+        </div>
+        <p class="hint" id="ex-info"></p>
+        <div class="export-actions">
+          <button type="button" id="btn-export" class="primary">Export PNG</button>
+          <button type="button" id="btn-cancel" hidden>Cancel</button>
+        </div>
+        <progress id="ex-progress" max="1" value="0" hidden></progress>
+        <p class="hint" id="ex-status" role="status"></p>
+      </details>
+
+      <p class="hint env" id="env-info"></p>
+    </aside>
+
+    <main class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div class="error" id="error" hidden></div>
+    </main>
+
+    <script src="js/color.js"></script>
+    <script src="js/generator.js"></script>
+    <script src="js/png.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
